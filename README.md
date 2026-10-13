@@ -16,6 +16,8 @@ Sistema de agendamento para uma barbearia fictícia, com experiência de cliente
 
 </div>
 
+![Página inicial do XD Barbershop](docs/inicio.png)
+
 ## O produto
 
 Escolher um corte deveria ser fácil. Reservar um horário também.
@@ -46,6 +48,13 @@ Este repositório permite avaliar uma aplicação completa, do React à persist�
 6. Leia o teste que dispara seis requisições simultâneas: somente uma pode reservar o mesmo horário.
 
 Os perfis da demonstração compartilham a agenda **da mesma sessão**. Outro visitante recebe sua própria agenda. O barbeiro de demonstração representa David e vê apenas reservas atribuídas a ele.
+
+<details>
+<summary>Veja o painel da barbearia</summary>
+
+![Painel administrativo com uma reserva cancelada](docs/painel.png)
+
+</details>
 
 ## Funcionalidades implementadas
 

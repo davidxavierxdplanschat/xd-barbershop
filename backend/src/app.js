@@ -219,12 +219,10 @@ export function createApp(settings) {
       req.user.demo &&
       (await Booking.countDocuments({ scope: scope(req.user) })) >= 20
     )
-      return res
-        .status(429)
-        .json({
-          error:
-            'Esta demonstração permite até 20 reservas. Cancele ou inicie uma nova sessão mais tarde.',
-        });
+      return res.status(429).json({
+        error:
+          'Esta demonstração permite até 20 reservas. Cancele ou inicie uma nova sessão mais tarde.',
+      });
     const booking = await Booking.create({
       scope: scope(req.user),
       clientId: req.user.id,
@@ -264,23 +262,19 @@ export function createApp(settings) {
   );
   app.use((error, req, res, next) => {
     if (error instanceof z.ZodError)
-      return res
-        .status(400)
-        .json({
-          error: 'Confira os campos informados.',
-          details: error.issues.map((i) => ({
-            field: i.path.join('.'),
-            message: i.message,
-          })),
-        });
+      return res.status(400).json({
+        error: 'Confira os campos informados.',
+        details: error.issues.map((i) => ({
+          field: i.path.join('.'),
+          message: i.message,
+        })),
+      });
     if (error.code === 11000)
-      return res
-        .status(409)
-        .json({
-          error: error.keyPattern?.email
-            ? 'Este e-mail já está cadastrado.'
-            : 'Este horário acabou de ser reservado. Escolha outro.',
-        });
+      return res.status(409).json({
+        error: error.keyPattern?.email
+          ? 'Este e-mail já está cadastrado.'
+          : 'Este horário acabou de ser reservado. Escolha outro.',
+      });
     if (error.type === 'entity.parse.failed')
       return res.status(400).json({ error: 'JSON inválido.' });
     if (error.status === 413)

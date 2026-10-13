@@ -75,6 +75,11 @@ export default function Home() {
     time: '',
   });
   const [cancelId, setCancelId] = useState(null);
+  function changeDate(event) {
+    const date = event.currentTarget.value;
+    setError('');
+    setSelection((previous) => ({ ...previous, date, time: '' }));
+  }
   async function loadCatalog() {
     try {
       const data = await api('/catalog');
@@ -653,14 +658,8 @@ export default function Home() {
                       required
                       min={catalog?.today}
                       value={selection.date}
-                      onChange={(e) => {
-                        setError('');
-                        setSelection((s) => ({
-                          ...s,
-                          date: e.target.value,
-                          time: '',
-                        }));
-                      }}
+                      onInput={changeDate}
+                      onChange={changeDate}
                     />
                   </label>
                   <div className="time-grid" aria-live="polite">

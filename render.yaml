@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: xd-barbershop-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci --workspace backend --include-workspace-root=false
+    startCommand: npm start --workspace backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+      - key: NODE_ENV
+        value: production
+      - key: DEMO_ENABLED
+        value: 'true'
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
